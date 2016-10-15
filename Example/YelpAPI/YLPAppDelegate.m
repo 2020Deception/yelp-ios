@@ -7,7 +7,8 @@
 //
 
 #import "YLPAppDelegate.h"
-#import "YLPClient+ClientSetup.h"
+
+@import YelpAPI;
 
 @interface YLPAppDelegate ()
 @property (strong, nonatomic) YLPClient *client;
@@ -23,7 +24,10 @@
 #pragma mark UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.client = [YLPClient newClient];
+    #warning Fill in the API keys below with your developer v3 keys.
+    [YLPClient authorizeWithAppId:@"" secret:@"" completionHandler:^(YLPClient *client, NSError *error) {
+        self.client = client;
+    }];
 
     return YES;
 }
